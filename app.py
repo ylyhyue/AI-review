@@ -25,7 +25,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 db = SQLAlchemy(app)
-client = OpenAI(api_key="sk-de310ae824a84f25a95fcd4ff73f87d7", base_url="https://api.deepseek.com")
+client = OpenAI(
+    api_key=os.environ.get("DEEPSEEK_API_KEY", ""),
+    base_url=os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+)
 pending_tasks = {}
 
 
